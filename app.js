@@ -13,7 +13,11 @@ mongoose.connect(connection_url, { useNewUrlParser: true }, () => {
 });
 
 app.use(express.json());
-app.use(cors());
+app.use(
+	cors({
+		origin: "*",
+	})
+);
 
 app.get("/", (req, res) => {
 	res.status(200).send("Prodcuts API");
