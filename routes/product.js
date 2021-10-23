@@ -1,10 +1,14 @@
 const express = require("express");
 const product = require("../models/productSchema.js");
+const { upload } = require("../utils/upload.js");
 
 const router = express.Router();
 
-router.post("/", (req, res) => {
-	const productReq = req.body;
+router.post("/", upload.array("images", 5), (req, res) => {
+	let productReq = req.body;
+	const image = req.files[0].location;
+
+	productReq["image"] = image;
 
 	product.create(productReq, (err, data) => {
 		if (err) {
