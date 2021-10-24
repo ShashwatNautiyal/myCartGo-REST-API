@@ -22,10 +22,10 @@ app.use(
 		allowedHeaders: ["auth-token"],
 	})
 );
+app.options("*", cors());
 app.use(express.json());
 app.use("/products", productsRoute);
 app.use("/user", authRoute);
-app.options("/cart", cors());
 app.use("/cart", cartRoute);
 
 app.get("/", (req, res) => {

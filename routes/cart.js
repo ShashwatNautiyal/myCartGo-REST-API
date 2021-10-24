@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const router = express.Router();
 
-router.get("/:id", cors(), verifyUser, (req, res) => {
+router.get("/:id", verifyUser, (req, res) => {
 	cart.find({ user: req.params.id })
 		.populate("product")
 		.exec((err, data) => {
@@ -18,7 +18,7 @@ router.get("/:id", cors(), verifyUser, (req, res) => {
 		});
 });
 
-router.post("/", cors(), verifyUser, (req, res) => {
+router.post("/", verifyUser, (req, res) => {
 	const newOrder = {
 		product: req.body.productId,
 		quantity: req.body.quantity ? parseInt(req.body.quantity) : 1,
@@ -34,7 +34,7 @@ router.post("/", cors(), verifyUser, (req, res) => {
 	});
 });
 
-router.delete("/:id", cors(), verifyUser, (req, res) => {
+router.delete("/:id", verifyUser, (req, res) => {
 	cart.remove({ _id: req.params.id }, (err, data) => {
 		if (err) {
 			res.status(500).send(err);
