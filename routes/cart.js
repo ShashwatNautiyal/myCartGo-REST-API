@@ -35,7 +35,7 @@ router.get("/:id", verifyUser, (req, res) => {
 });
 
 router.delete("/:id", verifyUser, (req, res) => {
-	product.remove({ _id: req.params.id }, (err, data) => {
+	cart.remove({ _id: req.params.id }, (err, data) => {
 		if (err) {
 			res.status(500).send(err);
 		} else {
