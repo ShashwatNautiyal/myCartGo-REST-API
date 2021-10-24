@@ -1,6 +1,6 @@
 const express = require("express");
 const product = require("../models/productSchema.js");
-const { upload } = require("../utils/upload.js");
+const { upload } = require("../middleware/upload");
 
 const router = express.Router();
 

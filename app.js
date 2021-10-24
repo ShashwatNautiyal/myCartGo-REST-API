@@ -4,6 +4,7 @@ const express = require("express");
 require("dotenv/config");
 const productsRoute = require("./routes/product");
 const authRoute = require("./routes/auth");
+const cartRoute = require("./routes/cart");
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -23,6 +24,7 @@ app.use(
 
 app.use("/products", productsRoute);
 app.use("/user", authRoute);
+app.use("/cart", cartRoute);
 
 app.get("/", (req, res) => {
 	res.status(200).send("Prodcuts API");
