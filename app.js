@@ -16,13 +16,16 @@ mongoose.connect(connection_url, { useNewUrlParser: true }, () => {
 
 app.use(
 	cors({
-		origin: "https://my-cart-go.vercel.app/",
+		origin: "*",
 		methods: ["GET", "POST", "DELETE"],
+		preflightContinue: true,
+		allowedHeaders: ["auth-token"],
 	})
 );
 app.use(express.json());
 app.use("/products", productsRoute);
 app.use("/user", authRoute);
+app.options("/cart", cors());
 app.use("/cart", cartRoute);
 
 app.get("/", (req, res) => {
