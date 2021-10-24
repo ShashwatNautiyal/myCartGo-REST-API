@@ -14,15 +14,19 @@ mongoose.connect(connection_url, { useNewUrlParser: true }, () => {
 	console.log("connected to DB!");
 });
 
-app.use(cors());
-app.options("*", cors());
+app.use(
+	cors({
+		origin: "https://my-cart-go.vercel.app/",
+		methods: ["GET", "POST", "DELETE"],
+	})
+);
 app.use(express.json());
 app.use("/products", productsRoute);
 app.use("/user", authRoute);
 app.use("/cart", cartRoute);
 
 app.get("/", (req, res) => {
-	res.status(200).send("Prodcuts API");
+	res.status(200).send("Products API");
 });
 
 app.listen(port, () => {

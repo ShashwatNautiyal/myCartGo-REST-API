@@ -1,8 +1,23 @@
 const express = require("express");
 const verifyUser = require("../middleware/verifyUser.js");
 const cart = require("../models/cartSchema.js");
+const cors = require("cors");
 
 const router = express.Router();
+router.options("*", cors());
+
+router.get("/:id", cors(), verifyUser, (req, res) => {
+	cart.find({ user: req.params.id })
+		.populate("product")
+		.exec((err, data) => {
+			if (err) {
+				res.status(500).send(err);
+			} else {
+				let order = returnOrder(data);
+				res.status(200).send(order);
+			}
+		});
+});
 
 router.post("/", verifyUser, (req, res) => {
 	const newOrder = {
@@ -18,19 +33,6 @@ router.post("/", verifyUser, (req, res) => {
 			res.status(201).send(data);
 		}
 	});
-});
-
-router.get("/:id", verifyUser, (req, res) => {
-	cart.find({ user: req.params.id })
-		.populate("product")
-		.exec((err, data) => {
-			if (err) {
-				res.status(500).send(err);
-			} else {
-				let order = returnOrder(data);
-				res.status(200).send(order);
-			}
-		});
 });
 
 router.delete("/:id", verifyUser, (req, res) => {
