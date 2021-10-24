@@ -16,11 +16,15 @@ mongoose.connect(connection_url, { useNewUrlParser: true }, () => {
 
 app.use(express.json());
 
-app.use(
-	cors({
-		origin: "*",
-	})
-);
+const corsOpts = {
+	origin: "*",
+
+	methods: ["GET", "POST"],
+
+	allowedHeaders: ["Content-Type"],
+};
+
+app.use(cors(corsOpts));
 
 app.use("/products", productsRoute);
 app.use("/user", authRoute);
