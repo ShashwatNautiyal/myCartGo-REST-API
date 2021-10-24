@@ -18,10 +18,8 @@ app.use(express.json());
 
 const corsOpts = {
 	origin: "*",
-
 	methods: ["GET", "POST"],
-
-	allowedHeaders: ["Content-Type"],
+	allowedHeaders: ["Content-Type", "auth-token"],
 };
 
 app.use(cors(corsOpts));
