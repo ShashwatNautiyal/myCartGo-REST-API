@@ -14,6 +14,7 @@ mongoose.connect(connection_url, { useNewUrlParser: true }, () => {
 	console.log("connected to DB!");
 });
 
+app.use(cors());
 app.options("*", cors());
 app.use(express.json());
 app.use("/products", productsRoute);
