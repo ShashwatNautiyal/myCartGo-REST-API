@@ -45,17 +45,21 @@ router.delete("/:id", verifyUser, (req, res) => {
 });
 
 function returnOrder(data) {
-	return data.map((item) => {
-		return {
-			title: item.product.title,
-			description: item.product.description,
-			price: item.product.price,
-			quantity: item.quantity,
-			total: item.product.price * item.quantity,
-			image: item.product.image,
-			_id: item._id,
-		};
-	});
+	if (data.length > 0) {
+		return data.map((item) => {
+			return {
+				title: item.product.title,
+				description: item.product.description,
+				price: item.product.price,
+				quantity: item.quantity,
+				total: item.product.price * item.quantity,
+				image: item.product.image,
+				_id: item._id,
+			};
+		});
+	} else {
+		return;
+	}
 }
 
 module.exports = router;
