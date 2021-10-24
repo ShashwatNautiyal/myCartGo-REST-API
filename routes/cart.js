@@ -1,9 +1,10 @@
 const express = require("express");
 const verifyUser = require("../middleware/verifyUser.js");
 const cart = require("../models/cartSchema.js");
-const product = require("../models/productSchema.js");
 
 const router = express.Router();
+
+router.options("/", cors());
 
 router.post("/", verifyUser, (req, res) => {
 	const newOrder = {
