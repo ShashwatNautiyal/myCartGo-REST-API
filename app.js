@@ -16,14 +16,7 @@ mongoose.connect(connection_url, { useNewUrlParser: true }, () => {
 
 app.use(express.json());
 
-const corsOpts = {
-	origin: "*",
-	methods: ["GET", "POST"],
-	allowedHeaders: ["Content-Type", "auth-token"],
-};
-
-app.use(cors(corsOpts));
-
+app.options("*", cors());
 app.use("/products", productsRoute);
 app.use("/user", authRoute);
 app.use("/cart", cartRoute);
