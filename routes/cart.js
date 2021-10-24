@@ -4,8 +4,6 @@ const cart = require("../models/cartSchema.js");
 
 const router = express.Router();
 
-router.options("/", cors());
-
 router.post("/", verifyUser, (req, res) => {
 	const newOrder = {
 		product: req.body.productId,
